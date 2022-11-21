@@ -41,6 +41,12 @@ public class Pawn extends Piece {
     }
 
     @Override
+    public void move(Location location) {
+        super.move(location);
+        setFirstMove(false);
+    }
+
+    @Override
     public List<Location> getValidMoves() {
         Map<Location, Square> squareMap = Board.getInstance().getSquareMap();
         List<Location> moves = new ArrayList<>();

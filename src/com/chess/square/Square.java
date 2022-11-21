@@ -18,6 +18,11 @@ public class Square {
         this.isOccupied = false;
     }
 
+    public void reset() {
+        currentPiece = null;
+        isOccupied = false;
+    }
+
     public JButton getjButton() {
         return jButton;
     }

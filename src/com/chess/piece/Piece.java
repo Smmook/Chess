@@ -40,10 +40,18 @@ public abstract class Piece {
     /**
      * Metodo que devuelve todos los movimientos legales de la pieza en este momento.
      *
-     * @param board tablero
      * @return  lista con todas las casillas a las que se puede mover la pieza
      */
     public abstract  List<Location> getValidMoves();
+
+    public void move(Location location) {
+        Board board = Board.getInstance();
+        getCurrentSquare().reset();
+        Square square = board.getSquareMap().get(location);
+        square.setCurrentPiece(this);
+        square.setOccupied(true);
+        setCurrentSquare(square);
+    }
 
     public PieceType getPieceType() {
         return pieceType;

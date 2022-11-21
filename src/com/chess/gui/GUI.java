@@ -60,19 +60,26 @@ public class GUI extends JFrame {
                     resetColor();
                     Game game = Game.getInstance();
                     if (game.getPieceSelected() != null) {
-                        System.out.println("Mal");
+                        // Habia pieza seleccionada
+                        System.out.println("Habia pieza seleccionada");
                         Map<Location, Square> squareMap = board.getSquareMap();
                         for (Location move : game.getMoves()) {
                             Square validSquare = squareMap.get(move);
                             if (validSquare.equals(square)) {
-                                // TODO: 21/11/2022 Move 
+                                // TODO: 21/11/2022 Move
+                                Square oldSquare = game.getPieceSelected().getCurrentSquare();
+                                game.getPieceSelected().move(square.getLocation());
+                                System.out.println("Se pasa turno");
+                                System.out.println(oldSquare);
                                 game.nextTurn();
+                                update();
                                 break;
                             }
                         }
                         game.setPieceSelected(null);
                         game.setMoves(null);
                     } else if (square.isOccupied() && square.getCurrentPiece().getPieceColor().equals(game.getTurn())) {
+                        // Se selecciona una pieza que se puede mover
                         System.out.println(square);
                         List<Location> moves = square.getCurrentPiece().getValidMoves();
                         game.setMoves(moves);
@@ -83,8 +90,9 @@ public class GUI extends JFrame {
                             validSquare.getjButton().setBackground(new Color(174, 177, 136));
                         }
                     } else {
-                        System.out.println(square.getCurrentPiece().getPieceColor());
-                        System.out.println(Game.getInstance().getTurn());
+                        // Se selecciona una casilla no valida o una pieza que no se puede mover
+                        game.setMoves(null);
+                        game.setPieceSelected(null);
                     }
                 });
                 guiSquares[i][j] = btn;
@@ -190,6 +198,8 @@ public class GUI extends JFrame {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    guiSquares[i][j].setIcon(null);
                 }
             }
         }
