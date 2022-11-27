@@ -34,30 +34,30 @@ public class Board {
     }
 
     public void initPieces() {
-        PieceBuilder.build(PieceType.ROOK, PieceColor.WHITE, new Location(File.A, 1));
-        PieceBuilder.build(PieceType.ROOK, PieceColor.WHITE, new Location(File.H, 1));
-        PieceBuilder.build(PieceType.ROOK, PieceColor.BLACK, new Location(File.H, 8));
-        PieceBuilder.build(PieceType.ROOK, PieceColor.BLACK, new Location(File.A, 8));
+        PieceFactory.build(PieceType.ROOK, PieceColor.WHITE, new Location(File.A, 1));
+        PieceFactory.build(PieceType.ROOK, PieceColor.WHITE, new Location(File.H, 1));
+        PieceFactory.build(PieceType.ROOK, PieceColor.BLACK, new Location(File.H, 8));
+        PieceFactory.build(PieceType.ROOK, PieceColor.BLACK, new Location(File.A, 8));
 
-        PieceBuilder.build(PieceType.KNIGHT, PieceColor.WHITE, new Location(File.B, 1));
-        PieceBuilder.build(PieceType.KNIGHT, PieceColor.WHITE, new Location(File.G, 1));
-        PieceBuilder.build(PieceType.KNIGHT, PieceColor.BLACK, new Location(File.G, 8));
-        PieceBuilder.build(PieceType.KNIGHT, PieceColor.BLACK, new Location(File.B, 8));
+        PieceFactory.build(PieceType.KNIGHT, PieceColor.WHITE, new Location(File.B, 1));
+        PieceFactory.build(PieceType.KNIGHT, PieceColor.WHITE, new Location(File.G, 1));
+        PieceFactory.build(PieceType.KNIGHT, PieceColor.BLACK, new Location(File.G, 8));
+        PieceFactory.build(PieceType.KNIGHT, PieceColor.BLACK, new Location(File.B, 8));
 
-        PieceBuilder.build(PieceType.BISHOP, PieceColor.WHITE, new Location(File.C, 1));
-        PieceBuilder.build(PieceType.BISHOP, PieceColor.WHITE, new Location(File.F, 1));
-        PieceBuilder.build(PieceType.BISHOP, PieceColor.BLACK, new Location(File.F, 8));
-        PieceBuilder.build(PieceType.BISHOP, PieceColor.BLACK, new Location(File.C, 8));
+        PieceFactory.build(PieceType.BISHOP, PieceColor.WHITE, new Location(File.C, 1));
+        PieceFactory.build(PieceType.BISHOP, PieceColor.WHITE, new Location(File.F, 1));
+        PieceFactory.build(PieceType.BISHOP, PieceColor.BLACK, new Location(File.F, 8));
+        PieceFactory.build(PieceType.BISHOP, PieceColor.BLACK, new Location(File.C, 8));
 
-        PieceBuilder.build(PieceType.QUEEN, PieceColor.WHITE, new Location(File.D, 1));
-        PieceBuilder.build(PieceType.QUEEN, PieceColor.BLACK, new Location(File.D, 8));
+        PieceFactory.build(PieceType.QUEEN, PieceColor.WHITE, new Location(File.D, 1));
+        PieceFactory.build(PieceType.QUEEN, PieceColor.BLACK, new Location(File.D, 8));
 
-        PieceBuilder.build(PieceType.KING, PieceColor.WHITE, new Location(File.E, 1));
-        PieceBuilder.build(PieceType.KING, PieceColor.BLACK, new Location(File.E, 8));
+        PieceFactory.build(PieceType.KING, PieceColor.WHITE, new Location(File.E, 1));
+        PieceFactory.build(PieceType.KING, PieceColor.BLACK, new Location(File.E, 8));
 
         for (File file : File.values()) {
-            PieceBuilder.build(PieceType.PAWN, PieceColor.WHITE, new Location(file, 2));
-            PieceBuilder.build(PieceType.PAWN, PieceColor.BLACK, new Location(file, 7));
+            PieceFactory.build(PieceType.PAWN, PieceColor.WHITE, new Location(file, 2));
+            PieceFactory.build(PieceType.PAWN, PieceColor.BLACK, new Location(file, 7));
         }
     }
 

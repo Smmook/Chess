@@ -6,7 +6,7 @@ import com.chess.square.Square;
 
 import java.util.Map;
 
-public final class PieceBuilder {
+public final class PieceFactory {
     public static Piece build(PieceType pieceType, PieceColor color, Location location) {
         Map<Location, Square> squareMap = Board.getInstance().getSquareMap();
         if (!squareMap.containsKey(location)) {

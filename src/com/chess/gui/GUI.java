@@ -81,6 +81,7 @@ public class GUI extends JFrame {
                     } else if (square.isOccupied() && square.getCurrentPiece().getPieceColor().equals(game.getTurn())) {
                         // Se selecciona una pieza que se puede mover
                         System.out.println(square);
+                        square.getjButton().setBackground(new Color(174, 177, 136));
                         List<Location> moves = square.getCurrentPiece().getValidMoves();
                         game.setMoves(moves);
                         game.setPieceSelected(square.getCurrentPiece());
