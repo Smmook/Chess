@@ -13,8 +13,32 @@ import java.util.Map;
  * Clase que representa al rey.
  */
 public class King extends Piece {
+    /**
+     * Almacena si el rey se ha movido antes.
+     */
+    private boolean isFirstMove = true;
+
     public King(PieceColor pieceColor) {
         super(PieceType.KING, pieceColor);
+    }
+
+    @Override
+    public void move(Location location) {
+        if (isFirstMove) {
+            int offSet = location.getFile().ordinal() - getCurrentSquare().getLocation().getFile().ordinal();
+            System.out.println(offSet);
+            if (Math.abs(offSet) > 1) {
+                float sign = Math.signum(offSet);
+                int rookOffset = (sign > 0) ? 3 : -4;
+                int rookMove = (sign > 0) ? -2 : 3;
+                Rook rook = (Rook) Board.getInstance().getSquareMap().get(LocationBuilder.build(getCurrentSquare().getLocation(), rookOffset, 0)).getCurrentPiece();
+                System.out.println(rook);
+                rook.move(LocationBuilder.build(rook.getCurrentSquare().getLocation(), rookMove, 0));
+            }
+        }
+
+        super.move(location);
+        isFirstMove = false;
     }
 
     @Override
@@ -30,7 +54,30 @@ public class King extends Piece {
         getMoves(moves, -1, 0);
         getMoves(moves, -1, 1);
 
+        if (isFirstMove) checkCastle(moves);
+
         return moves;
+    }
+
+    private void checkCastle(List<Location> moves) {
+        Map<Location, Square> squareMap = Board.getInstance().getSquareMap();
+
+        //Enroque corto
+        for (int i = 1; i < 2; i++) {
+            Square square = squareMap.get(LocationBuilder.build(getCurrentSquare().getLocation(), i, 0));
+            if (square.isOccupied()) return;
+        }
+        Square square = squareMap.get(LocationBuilder.build(getCurrentSquare().getLocation(), 3, 0));
+        if (square.isOccupied()) {
+            Piece piece = square.getCurrentPiece();
+            if (piece.getPieceType().equals(PieceType.ROOK)) {
+                Rook rook = (Rook) piece;
+                if (rook.isFirstMove()) {
+                    moves.add(LocationBuilder.build(getCurrentSquare().getLocation(), 2, 0));
+                }
+            }
+        }
+
     }
 
     /**
