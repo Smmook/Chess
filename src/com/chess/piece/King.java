@@ -18,10 +18,19 @@ public class King extends Piece {
      */
     private boolean isFirstMove = true;
 
+    /**
+     * Constructor de la clase.
+     *
+     * @param pieceColor color de la pieza
+     */
     public King(PieceColor pieceColor) {
         super(PieceType.KING, pieceColor);
     }
 
+    /**
+     * Metodo para mover la pieza.
+     * @param location casilla a la que se quiere mover la pieza
+     */
     @Override
     public void move(Location location) {
         if (isFirstMove) {
@@ -41,6 +50,11 @@ public class King extends Piece {
         isFirstMove = false;
     }
 
+    /**
+     * Metodo que devuelve todos los movimientos legales de la pieza en este momento.
+     *
+     * @return lista con todas las casillas a las que se puede mover la pieza
+     */
     @Override
     public List<Location> getValidMoves() {
         List<Location> moves = new ArrayList<>();
@@ -54,12 +68,19 @@ public class King extends Piece {
         getMoves(moves, -1, 0);
         getMoves(moves, -1, 1);
 
-        if (isFirstMove) checkCastle(moves);
+        if (isFirstMove) {
+            checkShortCastle(moves);
+            checkLongCastle(moves);
+        }
 
         return moves;
     }
 
-    private void checkCastle(List<Location> moves) {
+    /**
+     * Metodo que comprueba si se puede hacer el enroque corto.
+     * @param moves lista de movimientos
+     */
+    private void checkShortCastle(List<Location> moves) {
         Map<Location, Square> squareMap = Board.getInstance().getSquareMap();
 
         //Enroque corto
@@ -77,7 +98,30 @@ public class King extends Piece {
                 }
             }
         }
+    }
 
+    /**
+     * Metodo que comprueba si se puede hacer el enroque largo.
+     * @param moves lista de movimientos
+     */
+    private void checkLongCastle(List<Location> moves) {
+        Map<Location, Square> squareMap = Board.getInstance().getSquareMap();
+
+        //Enroque largo
+        for (int i = -1; i > -3; i--) {
+            Square square = squareMap.get(LocationBuilder.build(getCurrentSquare().getLocation(), i, 0));
+            if (square.isOccupied()) return;
+        }
+        Square square = squareMap.get(LocationBuilder.build(getCurrentSquare().getLocation(), -4, 0));
+        if (square.isOccupied()) {
+            Piece piece = square.getCurrentPiece();
+            if (piece.getPieceType().equals(PieceType.ROOK)) {
+                Rook rook = (Rook) piece;
+                if (rook.isFirstMove()) {
+                    moves.add(LocationBuilder.build(getCurrentSquare().getLocation(), -2, 0));
+                }
+            }
+        }
     }
 
     /**
