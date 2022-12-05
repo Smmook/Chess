@@ -15,8 +15,23 @@ import java.util.Map;
  * Clase que representa a la torre.
  */
 public class Rook extends Piece {
+    /**
+     * Almacena si la torre se ha movido antes.
+     */
+    private boolean isFirstMove = true;
+
     public Rook(PieceColor pieceColor) {
         super(PieceType.ROOK, pieceColor);
+    }
+
+    public boolean isFirstMove() {
+        return isFirstMove;
+    }
+
+    @Override
+    public void move(Location location) {
+        super.move(location);
+        isFirstMove = false;
     }
 
     @Override

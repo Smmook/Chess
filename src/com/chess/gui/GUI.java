@@ -59,7 +59,7 @@ public class GUI extends JFrame {
                 btn.addActionListener(e -> {
                     resetColor();
                     Game game = Game.getInstance();
-                    if (game.getPieceSelected() != null) {
+                    if (game.getPieceSelected() != null && (!square.isOccupied() || !square.getCurrentPiece().getPieceColor().equals(game.getTurn()))) {
                         // Habia pieza seleccionada
                         System.out.println("Habia pieza seleccionada");
                         Map<Location, Square> squareMap = board.getSquareMap();
