@@ -66,9 +66,8 @@ public class GUI extends JFrame {
                         for (Location move : game.getMoves()) {
                             Square validSquare = squareMap.get(move);
                             if (validSquare.equals(square)) {
-                                // TODO: 21/11/2022 Move
                                 Square oldSquare = game.getPieceSelected().getCurrentSquare();
-                                game.getPieceSelected().move(square.getLocation());
+                                board.movePiece(game.getPieceSelected(), square.getLocation());
                                 System.out.println("Se pasa turno");
                                 System.out.println(oldSquare);
                                 game.nextTurn();

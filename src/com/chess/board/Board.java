@@ -13,9 +13,12 @@ public class Board {
     private static Board instance;
     private final Square[][] boardSquares = new Square[BOARD_SIZE][BOARD_SIZE];
     private final Map<Location, Square> squareMap;
+    private final List<Observer> observers;
 
     private Board() {
         squareMap = new HashMap<>();
+        observers = new ArrayList<>();
+        observers.add(new MateObserver());
         for (int i = 0; i < boardSquares.length; i++) {
             SquareColor currentColor = (i % 2 == 0) ? SquareColor.LIGHT : SquareColor.DARK;
             for (File file : File.values()) {
@@ -67,6 +70,16 @@ public class Board {
 
     public Map<Location, Square> getSquareMap() {
         return squareMap;
+    }
+
+    public void movePiece(Piece piece, Location to) {
+        Square toSquare = squareMap.get(to);
+        if (toSquare.isOccupied()) {
+           for (Observer observer : observers) {
+               observer.update(toSquare.getCurrentPiece());
+           }
+        }
+        piece.move(to);
     }
 
 
