@@ -82,7 +82,7 @@ public class Board {
         piece.move(to);
     }
 
-
+    // TODO: 05/12/2022 ACtualizar mover pieza y meter observer
     // Todos los metodos restantes son para hacer pruebas.
 
     public void printBoard() {
