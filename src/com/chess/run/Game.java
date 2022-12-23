@@ -6,6 +6,7 @@ import com.chess.common.Location;
 import com.chess.gui.GUI;
 import com.chess.piece.*;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -50,5 +51,10 @@ public class Game {
 
     public void setPieceSelected(Piece pieceSelected) {
         this.pieceSelected = pieceSelected;
+    }
+
+    public void endGame(PieceColor winner) {
+        JOptionPane.showConfirmDialog(null, "Ganan las piezas " + winner + "!", "Fin del juego", JOptionPane.DEFAULT_OPTION);
+        GUI.getInstance().dispose();
     }
 }

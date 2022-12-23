@@ -12,7 +12,7 @@ public class Run {
         Board board = Board.getInstance();
         board.initPieces();
         Game game = Game.getInstance();
-        GUI gui = new GUI();
+        GUI gui = GUI.getInstance();
         gui.update();
 
     }

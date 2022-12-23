@@ -27,10 +27,12 @@ import java.util.Map;
 public class GUI extends JFrame {
     private final JButton[][] guiSquares;
 
+    private static GUI instance = null;
+
     /**
      * Constructor de la clase.
      */
-    public GUI() {
+    private GUI() {
         Board board = Board.getInstance();
 
         setTitle("Ajedrez");
@@ -125,6 +127,13 @@ public class GUI extends JFrame {
         startPane.add(initButton);
 
         setVisible(true);
+    }
+
+    public static GUI getInstance() {
+        if (instance == null) {
+            instance = new GUI();
+        }
+        return instance;
     }
 
     private void resetColor() {
